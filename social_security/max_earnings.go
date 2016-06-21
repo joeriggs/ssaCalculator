@@ -1,4 +1,4 @@
-package ss_max_earnings
+package social_security
 
 /* Contribution and Benefit Base Table.  Taken from:
  *   https://www.ssa.gov/oact/COLA/cbb.html
@@ -88,7 +88,23 @@ var maxWages = map[int]int{
   2016: 118500,
 }
 
+var meMostRecentYear int = 0
+func mostRecentMaxEarningsYear() int {
+  if meMostRecentYear == 0 {
+    for key, _ := range maxWages {
+      if key > meMostRecentYear {
+        meMostRecentYear = key
+      }
+    }
+  }
+  return meMostRecentYear
+}
+
 func MaxEarnings(year int) int {
-  return maxWages[year]
+  if year > mostRecentMaxEarningsYear() {
+    return maxWages[mostRecentMaxEarningsYear()]
+  } else {
+    return maxWages[year]
+  }
 }
 
