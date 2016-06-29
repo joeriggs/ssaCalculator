@@ -25,3 +25,6 @@ _testmain.go
 
 # Temporary vi files
 *.swp
+
+# Config files.
+*.json
