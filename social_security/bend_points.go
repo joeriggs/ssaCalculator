@@ -54,24 +54,25 @@ var bendPoints = map[int]bendPoint{
 
 var bpMostRecentYear int = 0
 func mostRecentBendPointsYear() int {
-  if bpMostRecentYear == 0 {
-    for key, _ := range maxWages {
-      if key > bpMostRecentYear {
-        bpMostRecentYear = key
-      }
-    }
-  }
-  return bpMostRecentYear
+	if bpMostRecentYear == 0 {
+		for key, _ := range maxWages {
+			if key > bpMostRecentYear {
+				bpMostRecentYear = key
+			}
+		}
+	}
+	return bpMostRecentYear
 }
 
-func BendPoints(year int) (int, int, int, int, int) {
-  yr := mostRecentBendPointsYear()
-  if year < yr {
-    yr = year
-  }
+func BendPoints(dob int) (int, int, int, int, int) {
+	var age_62 int = dob + 62
+	yr := mostRecentBendPointsYear()
+	if age_62 < yr {
+		yr = age_62
+	}
 
-  var point bendPoint = bendPoints[yr]
+	var point bendPoint = bendPoints[yr]
 
-  return point.pia_bend1, point.pia_bend2, point.family1, point.family2, point.family3
+	return point.pia_bend1, point.pia_bend2, point.family1, point.family2, point.family3
 }
 

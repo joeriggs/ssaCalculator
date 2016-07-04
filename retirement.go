@@ -9,6 +9,7 @@ import (
 func main() {
 	fmt.Printf("Beginning the retirement program.\n")
 
+/*
 	fmt.Printf("1985 MaxEarnings %d.\n", social_security.MaxEarnings(1985))
 	fmt.Printf("1995 MaxEarnings %d.\n", social_security.MaxEarnings(1995))
 	fmt.Printf("2005 MaxEarnings %d.\n", social_security.MaxEarnings(2005))
@@ -33,10 +34,12 @@ func main() {
 	fmt.Printf("2015 BendPoints %d %d %d %d %d.\n", a, b, c, d, e)
 	a, b, c, d, e  = social_security.BendPoints(2025)
 	fmt.Printf("2025 BendPoints %d %d %d %d %d.\n", a, b, c, d, e)
+*/
 
-	var joe_wages wages.WageList = make(wages.WageList)
-	wages.WageListAdd(1978,    191, joe_wages)
+	var person1Wages wages.WageList = make(wages.WageList)
+
+	wages.WageListAdd(1978,    191, person1Wages)
 	
-	social_security.Benefit(joe_wages)
+	social_security.Benefit(1962, person1Wages)
 }
 

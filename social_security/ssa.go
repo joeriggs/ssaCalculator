@@ -32,30 +32,52 @@ package social_security
  *
  ******************************************************************************/
 
-import ( "github.com/joeriggs/retirement/wages" )
+import ( "fmt"
+         "github.com/joeriggs/retirement/wages" )
 
-/* This function calculates the "indexing factor" for the specified year. */
-func indexingFactor(dob, year int) float32 {
-	var indexing_factor float32 = 0.0
-
-	/* If the person is age 60+, then their indexing factor is always 1. */
-	var age_60 int = dob + 60
-	if year >= age_60 {
-		indexing_factor = 1.0
+func min(val1, val2 int) int {
+	if val1 < val2 {
+		return val1
 	} else {
-		/* If the person is less than age 60, calculate their indexing
-		 * factor. */
-		var awi_60 float32 = AverageWageIndex(age_60)
-		var awi    float32 = AverageWageIndex(year)
-		indexing_factor = awi_60 / awi
+		return val2
 	}
-
-	return indexing_factor
 }
 
-func Benefit(career_earnings wages.WageList) {
+func Benefit(dob int, career_earnings wages.WageList) {
 	var highest_earnings WageList = WageListCreate()
 
-	WageListHighestIndexedEarnings(career_earnings, highest_earnings)
+	WageListHighestIndexedEarnings(dob, career_earnings, highest_earnings)
+
+	var total float32 = WageListTotalIndexedEarnings(highest_earnings)
+
+	var AIME int = int(total) / (35 * 12)
+
+	fmt.Printf("total %9.2f : AIME %d\n", total, AIME)
+
+	var bend1, bend2 int
+	bend1, bend2, _, _, _ = BendPoints(dob)
+	fmt.Printf("bend1 = %d : bend2 = %d\n", bend1, bend2)
+
+	var tempAIME int = AIME
+
+	var bend1Amt int = min(bend1, tempAIME)
+	var bend1BenefitFloat float32 = float32(bend1Amt) * 0.90
+	var bend1Benefit int = int(bend1BenefitFloat)
+	tempAIME -= bend1Amt
+	fmt.Printf("bend1Amt = %d : bend1Benefit = %d\n", bend1Amt, bend1Benefit)
+
+	var bend2Amt int = min((bend2 - bend1), tempAIME)
+	var bend2BenefitFloat float32 = float32(bend2Amt) * 0.32
+	var bend2Benefit int = int(bend2BenefitFloat)
+	tempAIME -= bend2Amt
+	fmt.Printf("bend2Amt = %d : bend2Benefit = %d\n", bend2Amt, bend2Benefit)
+
+	var moreAmt int = tempAIME
+	var moreBenefitFloat float32 = float32(moreAmt) * 0.15
+	var moreBenefit int = int(moreBenefitFloat)
+	fmt.Printf("moreAmt = %d : moreBenefit = %d\n", moreAmt, moreBenefit)
+
+	var PIA int = bend1Benefit + bend2Benefit + moreBenefit
+	fmt.Printf("PIA = %d\n", PIA)
 }
 
