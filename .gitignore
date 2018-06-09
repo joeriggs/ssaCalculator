@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+retirement
 
 # Folders
 _obj
@@ -22,9 +23,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+*.xml
 
 # Temporary vi files
 *.swp
 
-# Config files.
-*.json
