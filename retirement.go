@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/joeriggs/ssa/data"
-	"github.com/joeriggs/retirement/social_security"
-	"github.com/joeriggs/retirement/wages"
+	"github.com/joeriggs/ssa/social_security"
+	"github.com/joeriggs/ssa/wages"
 )
 
 func main() {
