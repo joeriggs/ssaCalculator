@@ -25,6 +25,7 @@ func main() {
 		wages.Add(year, ficaEarningsFloat, person1Wages)
 	}
 
-	social_security.Benefit(statement.DateOfBirthYear(), person1Wages)
+	var benefit = social_security.Benefit(statement.DateOfBirthYear(), person1Wages)
+	fmt.Printf("The benefit amount is $%d\n", benefit)
 }
 
