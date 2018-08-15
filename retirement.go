@@ -100,12 +100,11 @@ func main() {
 			/* Do a few extra calculations along the way, just to
 			 * see how closely our calculations match the user's
 			 * statement. */
-			if age == 62 {
-				var tmpFullBenefit = social_security.Benefit(yearOfBirth, person1Wages)
-				var earlyBenefit = float32(tmpFullBenefit) * multipliers[0]
-				calculatedEarlyBenefit = int(earlyBenefit)
-			} else if age == 67 {
+			if age == 67 {
 				calculatedFullBenefit = social_security.Benefit(yearOfBirth, person1Wages)
+
+				var earlyBenefit = float32(calculatedFullBenefit) * multipliers[0]
+				calculatedEarlyBenefit = int(earlyBenefit)
 			} else if age == 70 {
 				var tmpFullBenefit = social_security.Benefit(yearOfBirth, person1Wages)
 				var delayedBenefit = float32(tmpFullBenefit) * multipliers[8]
