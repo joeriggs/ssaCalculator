@@ -13,7 +13,7 @@ func main() {
 
 	var person1Wages wages.List = make(wages.List)
 
-	statement := data.New("Your_Social_Security_Statement_Data.xml")
+	var statement = data.New("Your_Social_Security_Statement_Data.xml")
 
 	var numEarningsYears = statement.NumEarningsYears()
 
@@ -101,13 +101,12 @@ func main() {
 			 * see how closely our calculations match the user's
 			 * statement. */
 			if age == 67 {
-				calculatedFullBenefit = social_security.Benefit(yearOfBirth, person1Wages)
+				calculatedFullBenefit = fullBenefit
 
-				var earlyBenefit = float32(calculatedFullBenefit) * multipliers[0]
+				var earlyBenefit = float32(fullBenefit) * multipliers[0]
 				calculatedEarlyBenefit = int(earlyBenefit)
 			} else if age == 70 {
-				var tmpFullBenefit = social_security.Benefit(yearOfBirth, person1Wages)
-				var delayedBenefit = float32(tmpFullBenefit) * multipliers[8]
+				var delayedBenefit = float32(fullBenefit) * multipliers[8]
 				calculatedDelayedBenefit = int(delayedBenefit)
 			}
 
