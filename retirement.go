@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"time"
-	"github.com/joeriggs/ssa/data"
 	"github.com/joeriggs/ssa/social_security"
+	"github.com/joeriggs/ssa/statement"
 	"github.com/joeriggs/ssa/wages"
+	"time"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 
 	var person1Wages wages.List = make(wages.List)
 
-	var statement = data.New("Your_Social_Security_Statement_Data.xml")
+	var statement = statement.New("Your_Social_Security_Statement_Data.xml")
 
 	var numEarningsYears = statement.NumEarningsYears()
 
