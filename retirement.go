@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/joeriggs/ssa/social_security"
+	"github.com/joeriggs/ssa/benefit"
 	"github.com/joeriggs/ssa/statement"
 	"github.com/joeriggs/ssa/wages"
 	"time"
@@ -80,7 +80,7 @@ func main() {
 		for ; age <= 70; {
 			/* Calculate the full benefit for the year.  All early
 			 * and delayed benefits are calculated from this value. */
-			var fullBenefit = social_security.Benefit(yearOfBirth, person1Wages)
+			var fullBenefit = benefit.Benefit(yearOfBirth, person1Wages)
 			var benefits [9]string
 
 			var i int
