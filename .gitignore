@@ -2,7 +2,7 @@
 *.o
 *.a
 *.so
-retirement
+ssaCalculator
 
 # Folders
 _obj
